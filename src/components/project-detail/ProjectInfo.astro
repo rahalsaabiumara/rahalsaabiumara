@@ -1,0 +1,59 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const infoItems = [
+  { icon: 'calendar', label: 'Year', value: project.year },
+  { icon: 'user', label: 'Role', value: project.role },
+  { icon: 'clock', label: 'Duration', value: project.duration },
+  { icon: 'team', label: 'Team Size', value: project.team },
+  { icon: 'status', label: 'Status', value: project.status },
+  { icon: 'platform', label: 'Platform', value: project.platform },
+  { icon: 'category', label: 'Category', value: project.categories.join(', ').toUpperCase() },
+];
+---
+
+<section class="section pd-info" id="project-info">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">DETAILS</div>
+      <h2 class="display-md reveal reveal-delay-1">PROJECT INFORMATION</h2>
+    </div>
+    <div class="pd-info-grid">
+      {infoItems.map((item, i) => (
+        <div class={`pd-info-card card reveal ${i > 0 ? `reveal-delay-${Math.min(i, 4)}` : ''}`}>
+          <div class="pd-info-icon">
+            {item.icon === 'calendar' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            )}
+            {item.icon === 'user' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            )}
+            {item.icon === 'clock' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            )}
+            {item.icon === 'team' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            )}
+            {item.icon === 'status' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            )}
+            {item.icon === 'platform' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            )}
+            {item.icon === 'category' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            )}
+          </div>
+          <div class="pd-info-label">{item.label}</div>
+          <div class="pd-info-value">{item.value}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

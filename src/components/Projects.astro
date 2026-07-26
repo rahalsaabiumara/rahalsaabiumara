@@ -1,5 +1,5 @@
 ---
-
+import { projects } from '../data/projects';
 ---
 
 <section class="section projects" id="projects">
@@ -18,215 +18,54 @@
 
     <!-- Projects Grid -->
     <div class="projects-grid" id="projects-grid">
-      <!-- Project 1: ML -->
-      <div class="project-card card reveal" data-category="ml">
-        <div class="card-image">
-          <img src="/proyek1.png" alt="EduDetect - Image Detection and Classification for Students Activity" loading="lazy" />
-        </div>
-        <div class="card-body">
-          <div class="project-category">MACHINE LEARNING</div>
-          <h3>EduDetect - Image Detection and Classification for Students Activity</h3>
-          <p class="project-desc">
-           An application system that can detect and classify students activities during class using YOLOv11 and Gemini model
-          </p>
-          <div class="project-tags">
-            <span class="tag tag--accent">PYTHON</span>
-            <span class="tag tag--accent">YOLO</span>
-            <span class="tag">GEMINI</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/rahalsaabiumara/sistem-klasifikasi-deteksi" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              CODE
+      {projects.map((project, i) => {
+        const category = project.categories[0] || 'web';
+        const delayClass = i % 3 > 0 ? `reveal-delay-${i % 3}` : '';
+        
+        // Determine tag color based on category
+        const tagColor = category === 'ml' ? 'tag--accent' : 
+                         category === 'web' ? 'tag--blue' : '';
+        
+        return (
+          <div class={`project-card card reveal ${delayClass}`} data-category={category}>
+            <a href={`/projects/${project.slug}`} class="project-card-link">
+              <div class="card-image">
+                <img src={project.thumbnail} alt={project.title} loading="lazy" />
+              </div>
             </a>
-            <a href="https://sistem-klasifikasi-deteksi-hhaknatcdz5yuztfx8graa.streamlit.app/" class="project-link">
-              <svg xmlns="https://sistem-klasifikasi-deteksi-hhaknatcdz5yuztfx8graa.streamlit.app/undefined" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              LIVE DEMO
-            </a>
+            <div class="card-body">
+              <div class="project-category">{category === 'ml' ? 'MACHINE LEARNING' : category === 'web' ? 'SOFTWARE DEVELOPMENT' : category.toUpperCase()}</div>
+              <h3>{project.title}</h3>
+              <p class="project-desc">{project.shortDescription}</p>
+              <div class="project-tags">
+                {project.technologies.slice(0, 3).map((tech, j) => (
+                  <span class={`tag ${j < 2 ? tagColor : ''}`}>{tech.toUpperCase()}</span>
+                ))}
+              </div>
+              <div class="project-links">
+                {project.github && (
+                  <a href={project.github} class="project-link" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    CODE
+                  </a>
+                )}
+                {project.liveDemo && (
+                  <a href={project.liveDemo} class="project-link" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    LIVE DEMO
+                  </a>
+                )}
+                <a href={`/projects/${project.slug}`} class="project-link project-link--details">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  SEE DETAILS
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Project 2: Web -->
-      <div class="project-card card reveal reveal-delay-1" data-category="web">
-        <div class="card-image">
-          <img src="/NutriDetect-2 1.png" alt="NutriDetect - Mobile Nutrition Tracking" loading="lazy" />
-        </div>
-        <div class="card-body">
-          <div class="project-category">SOFTWARE DEVELOPMENT</div>
-          <h3>NutriDetect - Mobile Nutrition Tracking</h3>
-          <p class="project-desc">
-            A mobile application that helps users track their daily nutrition intake and maintain a healthy lifestyle with AI-powered food recognition and personalized recommendations
-          </p>
-          <div class="project-tags">
-            <span class="tag tag--blue">NEXT.JS</span>
-            <span class="tag tag--blue">REACT</span>
-            <span class="tag">STRIPE</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/rahalsaabiumara/nutridetect-nutritiontrack" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              CODE
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 3: Web -->
-      <div class="project-card card reveal reveal-delay-2" data-category="web">
-        <div class="card-image">
-          <img src="/Group 1.png" alt="SisManProBis" loading="lazy" />
-        </div>
-        <div class="card-body">
-          <div class="project-category">WEB DEVELOPMENT</div>
-          <h3>SisManProBis - Business Process Management System</h3>
-          <p class="project-desc">
-            A web-based system for managing business processes, improving operational efficiency, and providing real-time insights into business performance at PT Dirgantara Indonesia
-          </p>
-          <div class="project-tags">
-            <span class="tag tag--red">LARAVEL</span>
-            <span class="tag tag--red">POSTGRESQL</span>
-            <span class="tag">DOCKER</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/rahalsaabiumara/sismanprobis-ptdi" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              CODE
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 4: ML -->
-      <div class="project-card card reveal" data-category="ml">
-        <div class="card-image">
-          <img src="/project-ml.png" alt="Sales Analytics Dashboard" loading="lazy" />
-        </div>
-        <div class="card-body">
-          <div class="project-category">DATA ANALYSIS</div>
-          <h3>Sales Analytics Dashboard</h3>
-          <p class="project-desc">
-            A dashboard that displays total sales by product, region, and month, using available transaction data to provide data-driven insights into sales.
-          </p>
-          <div class="project-tags">
-            <span class="tag tag--accent">PYTHON</span>
-            <span class="tag tag--accent">JUPYTER NOTEBOOK</span>
-            <span class="tag">STREAMLIT</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/rahalsaabiumara/dashboard-analisis-penjualan" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              CODE
-            </a>
-            <a href="https://z5petewb56fkupiwszs9di.streamlit.app/" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-              LIVE DEMO
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 5: Web -->
-      <div class="project-card card reveal reveal-delay-1" data-category="web">
-        <div class="card-image">
-          <img src="/NUNA-2 1.png" alt="NUNA - Mental Health Monitoring" loading="lazy" />
-        </div>
-        <div class="card-body">
-          <div class="project-category">SOFTWARE DEVELOPMENT</div>
-          <h3>NUNA - Mental Health Monitoring</h3>
-          <p class="project-desc">
-            A mobile application designed to support mental health monitoring and self-care by providing emotional tracking, AI-powered chatbot support, and personalized coping strategies
-          </p>
-          <div class="project-tags">
-            <span class="tag tag--blue">REACT</span>
-            <span class="tag tag--blue">FIREBASE</span>
-            <span class="tag">TAILWIND</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/rahalsaabiumara/nuna-mentalhealthapp" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              CODE
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 6: Web -->
-      <div class="project-card card reveal reveal-delay-2" data-category="web">
-        <div class="card-image">
-          <img src="/Group 2.png" alt="Website Kemahasiswaan" loading="lazy" />
-        </div>
-        <div class="card-body">
-          <div class="project-category">WEB DEVELOPMENT</div>
-          <h3>Website Kemahasiswaan</h3>
-          <p class="project-desc">
-            A web-based system for managing student organizations, providing event management, membership tracking, and communication tools to enhance student engagement and activities.
-          </p>
-          <div class="project-tags">
-            <span class="tag tag--red">LARAVEL</span>
-            <span class="tag tag--red">MYSQL</span>
-            <span class="tag">PHP</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/rahalsaabiumara/Website-Kemahasiswaan" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              CODE
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Project 7: Web -->
-      <div class="project-card card reveal reveal-delay-1" data-category="web">
-        <div class="card-image">
-          <img src="/project-ukm.png" alt="SI Pendaftaran Organisasi & UKM" loading="lazy" />
-        </div>
-        <div class="card-body">
-          <div class="project-category">WEB DEVELOPMENT</div>
-          <h3>SI Pendaftaran Organisasi & UKM</h3>
-          <p class="project-desc">
-            A web-based application for SME and organization registration with role-based access control (RBAC) for Master Admins, Admins, and Students.
-          <div class="project-tags">
-            <span class="tag tag--blue">LARAVEL</span>
-            <span class="tag tag--blue">MYSQL</span>
-            <span class="tag">PHP</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/rahalsaabiumara/web-pendaftaran-ukm-organisasi" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              CODE
-            </a>
-          </div>
-        </div>
-      </div>
-
-     <!-- Project 8: Web -->
-      <div class="project-card card reveal reveal-delay-2" data-category="web">
-        <div class="card-image">
-          <img src="/mallhub.png" alt="MallHub Jogja" loading="lazy" />
-        </div>
-        <div class="card-body">
-          <div class="project-category">WEB DEVELOPMENT</div>
-          <h3>MallHub Jogja</h3>
-          <p class="project-desc">
-            A comprehensive directory platform for malls and shopping centers in the Yogyakarta area. This platform is designed to make it easy for users to explore various malls, discover tenants (stores, restaurants, entertainment), and view the facilities available at each of their favorite malls.
-          </p>
-          <div class="project-tags">
-            <span class="tag tag--red">LARAVEL</span>
-            <span class="tag tag--red">MYSQL</span>
-            <span class="tag">PHP</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/rahalsaabiumara/MallHub-Jogja" class="project-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-              CODE
-            </a>
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </div>
   </div>
-  
 </section>
 
 <script>

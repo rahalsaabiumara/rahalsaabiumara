@@ -1,0 +1,45 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+// Map categories to tag color variants
+const categoryColors = {
+  'Frontend': 'tag--blue',
+  'Backend': 'tag--red',
+  'Database': 'tag--accent',
+  'Machine Learning': 'tag--accent',
+  'AI/ML': 'tag--accent',
+  'Data Processing': 'tag--accent',
+  'Visualization': 'tag--blue',
+  'Deployment': 'tag--red',
+  'Tools': '',
+};
+---
+
+<section class="section pd-techstack" id="tech-stack">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">STACK</div>
+      <h2 class="display-md reveal reveal-delay-1">TECHNOLOGY STACK</h2>
+    </div>
+    <div class="pd-techstack-groups">
+      {project.techStack.map((group, i) => (
+        <div class={`pd-techstack-group reveal reveal-delay-${Math.min((i % 3) + 1, 4)}`}>
+          <div class="pd-techstack-category">{group.category.toUpperCase()}</div>
+          <div class="pd-techstack-items">
+            {group.items.map((item) => (
+              <span class={`tag ${(categoryColors as any)[group.category] || ''}`}>
+                {item.toUpperCase()}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

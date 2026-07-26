@@ -1,0 +1,41 @@
+---
+import type { Project } from '../../data/projects';
+import { getRelatedProjects } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const related = getRelatedProjects(project.slug, 3);
+---
+
+{related.length > 0 && (
+  <section class="section pd-related" id="related-projects">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">EXPLORE MORE</div>
+        <h2 class="display-md reveal reveal-delay-1">RELATED PROJECTS</h2>
+      </div>
+      <div class="pd-related-grid">
+        {related.map((p, i) => (
+          <a href={`/projects/${p.slug}`} class={`pd-related-card card reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="card-image">
+              <img src={p.thumbnail} alt={p.title} loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="project-category">{p.categories[0]?.toUpperCase()}</div>
+              <h3>{p.title}</h3>
+              <p class="project-desc">{p.shortDescription}</p>
+              <div class="project-tags">
+                {p.technologies.slice(0, 3).map((tech) => (
+                  <span class="tag">{tech.toUpperCase()}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

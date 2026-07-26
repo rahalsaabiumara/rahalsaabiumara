@@ -1,0 +1,79 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+{project.challenges.length > 0 && (
+  <section class="section pd-challenges" id="challenges">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">OBSTACLES</div>
+        <h2 class="display-md reveal reveal-delay-1">CHALLENGES & SOLUTIONS</h2>
+      </div>
+      <div class="pd-challenges-list" id="challenges-accordion">
+        {project.challenges.map((challenge, i) => (
+          <div class={`pd-challenge-item card reveal reveal-delay-${Math.min(i + 1, 4)} ${i === 0 ? 'active' : ''}`} data-challenge={i}>
+            <button class="pd-challenge-header" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`challenge-body-${i}`}>
+              <div class="pd-challenge-number">{String(i + 1).padStart(2, '0')}</div>
+              <div class="pd-challenge-title">Challenge {i + 1}</div>
+              <div class="pd-challenge-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </div>
+            </button>
+            <div class="pd-challenge-body" id={`challenge-body-${i}`}>
+              <div class="pd-challenge-section">
+                <div class="pd-challenge-label">PROBLEM</div>
+                <p>{challenge.problem}</p>
+              </div>
+              <div class="pd-challenge-section">
+                <div class="pd-challenge-label pd-challenge-label--blue">SOLUTION</div>
+                <p>{challenge.solution}</p>
+              </div>
+              <div class="pd-challenge-section">
+                <div class="pd-challenge-label pd-challenge-label--green">RESULT</div>
+                <p>{challenge.result}</p>
+              </div>
+              <div class="pd-challenge-stripe">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  const accordion = document.getElementById('challenges-accordion');
+  if (accordion) {
+    const items = accordion.querySelectorAll('.pd-challenge-item');
+    const headers = accordion.querySelectorAll('.pd-challenge-header');
+
+    headers.forEach((header, index) => {
+      header.addEventListener('click', () => {
+        const item = items[index];
+        const isActive = item?.classList.contains('active');
+
+        // Close all
+        items.forEach((it) => {
+          it.classList.remove('active');
+          it.querySelector('.pd-challenge-header')?.setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked if it wasn't active
+        if (!isActive && item) {
+          item.classList.add('active');
+          header.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+</script>

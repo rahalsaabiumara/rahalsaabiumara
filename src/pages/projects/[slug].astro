@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import ProjectHero from '../../components/project-detail/ProjectHero.astro';
+import ProjectOverview from '../../components/project-detail/ProjectOverview.astro';
+import ProjectInfo from '../../components/project-detail/ProjectInfo.astro';
+import ProjectProblem from '../../components/project-detail/ProjectProblem.astro';
+import ProjectSolution from '../../components/project-detail/ProjectSolution.astro';
+import ProjectTimeline from '../../components/project-detail/ProjectTimeline.astro';
+import ProjectFeatures from '../../components/project-detail/ProjectFeatures.astro';
+import ProjectTechStack from '../../components/project-detail/ProjectTechStack.astro';
+import ProjectGallery from '../../components/project-detail/ProjectGallery.astro';
+import ProjectArchitecture from '../../components/project-detail/ProjectArchitecture.astro';
+import ProjectChallenges from '../../components/project-detail/ProjectChallenges.astro';
+import ProjectMetrics from '../../components/project-detail/ProjectMetrics.astro';
+import ProjectAchievements from '../../components/project-detail/ProjectAchievements.astro';
+import ProjectLessons from '../../components/project-detail/ProjectLessons.astro';
+import ProjectRelated from '../../components/project-detail/ProjectRelated.astro';
+import ProjectNavigation from '../../components/project-detail/ProjectNavigation.astro';
+import { projects, getProjectBySlug } from '../../data/projects';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug as string);
+
+if (!project) {
+  return Astro.redirect('/404');
+}
+
+const pageTitle = `${project.title} — Rahalsa Abi Umara`;
+const pageDescription = project.shortDescription;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Navbar />
+  <main class="project-detail-page">
+    <ProjectHero project={project} />
+    <ProjectOverview project={project} />
+    <ProjectInfo project={project} />
+    <ProjectProblem project={project} />
+    <ProjectSolution project={project} />
+    <ProjectTimeline project={project} />
+    <ProjectFeatures project={project} />
+    <ProjectTechStack project={project} />
+    <ProjectGallery project={project} />
+    <ProjectArchitecture project={project} />
+    <ProjectChallenges project={project} />
+    <ProjectMetrics project={project} />
+    <ProjectAchievements project={project} />
+    <ProjectLessons project={project} />
+    <ProjectRelated project={project} />
+    <ProjectNavigation project={project} />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Scroll Reveal using IntersectionObserver (same as index.astro)
+  const revealElements = document.querySelectorAll('.reveal');
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px',
+    }
+  );
+
+  revealElements.forEach((el) => {
+    revealObserver.observe(el);
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (this: HTMLAnchorElement, e: Event) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId) {
+        const target = document.querySelector(targetId);
+        target?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>

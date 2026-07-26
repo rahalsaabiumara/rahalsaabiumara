@@ -1,0 +1,52 @@
+---
+import type { Project } from '../../data/projects';
+import { getAdjacentProjects } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { prev, next } = getAdjacentProjects(project.slug);
+---
+
+<nav class="pd-navigation" id="project-navigation" aria-label="Project navigation">
+  <div class="container">
+    <div class="pd-nav-inner">
+      <!-- Previous -->
+      {prev ? (
+        <a href={`/projects/${prev.slug}`} class="pd-nav-link pd-nav-prev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <div class="pd-nav-text">
+            <span class="pd-nav-label">PREVIOUS PROJECT</span>
+            <span class="pd-nav-title">{prev.title}</span>
+          </div>
+        </a>
+      ) : <div></div>}
+
+      <!-- Back to Projects -->
+      <a href="/#projects" class="pd-nav-back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        ALL PROJECTS
+      </a>
+
+      <!-- Next -->
+      {next ? (
+        <a href={`/projects/${next.slug}`} class="pd-nav-link pd-nav-next">
+          <div class="pd-nav-text" style="text-align: right;">
+            <span class="pd-nav-label">NEXT PROJECT</span>
+            <span class="pd-nav-title">{next.title}</span>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      ) : <div></div>}
+    </div>
+
+    <!-- M Stripe -->
+    <div class="m-stripe" style="margin-top: var(--space-xl);">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>

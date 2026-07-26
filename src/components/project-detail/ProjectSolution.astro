@@ -1,0 +1,51 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const solutionItems = [
+  {
+    number: '01',
+    label: 'THE SOLUTION',
+    title: 'What we built',
+    content: project.solutionOverview.solution,
+  },
+  {
+    number: '02',
+    label: 'WHY THIS APPROACH',
+    title: 'Why this solution was chosen',
+    content: project.solutionOverview.whyChosen,
+  },
+  {
+    number: '03',
+    label: 'HOW IT WORKS',
+    title: 'The mechanism behind it',
+    content: project.solutionOverview.howItWorks,
+  },
+];
+---
+
+<section class="section pd-solution" id="solution">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">APPROACH</div>
+      <h2 class="display-md reveal reveal-delay-1">SOLUTION</h2>
+    </div>
+    <div class="pd-solution-list">
+      {solutionItems.map((item, i) => (
+        <div class={`pd-solution-item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+          <div class="pd-solution-number">{item.number}</div>
+          <div class="pd-solution-content">
+            <div class="pd-solution-label">{item.label}</div>
+            <h3 class="pd-solution-title">{item.title}</h3>
+            <p class="pd-solution-text">{item.content}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

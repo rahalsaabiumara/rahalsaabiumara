@@ -1,0 +1,31 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+{project.metrics.length > 0 && (
+  <section class="section pd-metrics" id="metrics">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">RESULTS</div>
+        <h2 class="display-md reveal reveal-delay-1">KEY METRICS</h2>
+      </div>
+      <div class="pd-metrics-grid">
+        {project.metrics.map((metric, i) => (
+          <div class={`pd-metric-card card reveal reveal-delay-${Math.min((i % 4) + 1, 4)}`}>
+            <div class="pd-metric-value" data-value={metric.value}>{metric.value}</div>
+            <div class="pd-metric-label">{metric.label.toUpperCase()}</div>
+            {metric.description && (
+              <div class="pd-metric-desc">{metric.description}</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

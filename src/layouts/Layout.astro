@@ -2,11 +2,13 @@
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
 }
 
 const { 
   title = "Rahalsa Abi Umara — ML Enthusiast, Web Developer, Data Analyst",
-  description = "Personal portfolio of Rahalsa Abi Umara. Machine Learning Enthusiast, Web Developer, and Data Analyst building intelligent solutions."
+  description = "Personal portfolio of Rahalsa Abi Umara. Machine Learning Enthusiast, Web Developer, and Data Analyst building intelligent solutions.",
+  ogImage = "/hero-photo-1.png"
 } = Astro.props;
 ---
 
@@ -25,6 +27,13 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
     <title>{title}</title>
   </head>

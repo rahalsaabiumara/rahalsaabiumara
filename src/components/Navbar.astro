@@ -5,12 +5,16 @@
 <nav class="navbar" id="navbar">
   <div class="navbar-inner">
     <a href="#" class="navbar-logo" id="navbar-logo">
-      <img src="/logo-navbar.png" style="width: 80px; height: 80px; object-fit: contain;" />
-      </a>
+      <div class="m-mark">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      RA
+    </a>
 
     <div class="navbar-links" id="navbar-links">
       <a href="#about">About</a>
-      <a href="#education">Education</a>
       <a href="#experience">Experience</a>
       <a href="#achievements">Achievements</a>
       <a href="#certifications">Certifications</a>
@@ -34,7 +38,6 @@
     <span></span>
   </div>
   <a href="#about" class="mobile-nav-link">About</a>
-  <a href="#education" class="mobile-nav-link">Education</a>
   <a href="#experience" class="mobile-nav-link">Experience</a>
   <a href="#achievements" class="mobile-nav-link">Achievements</a>
   <a href="#certifications" class="mobile-nav-link">Certifications</a>
@@ -44,31 +47,33 @@
 
 <script>
   // Navbar scroll effect
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
+  const navbar = document.getElementById("navbar");
+  window.addEventListener("scroll", () => {
     if (window.scrollY > 50) {
-      navbar?.classList.add('scrolled');
+      navbar?.classList.add("scrolled");
     } else {
-      navbar?.classList.remove('scrolled');
+      navbar?.classList.remove("scrolled");
     }
   });
 
   // Hamburger toggle
-  const hamburger = document.getElementById('navbar-hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburger = document.getElementById("navbar-hamburger");
+  const mobileMenu = document.getElementById("mobile-menu");
 
-  hamburger?.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileMenu?.classList.toggle('active');
-    document.body.style.overflow = mobileMenu?.classList.contains('active') ? 'hidden' : '';
+  hamburger?.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    mobileMenu?.classList.toggle("active");
+    document.body.style.overflow = mobileMenu?.classList.contains("active")
+      ? "hidden"
+      : "";
   });
 
   // Close mobile menu on link click
-  document.querySelectorAll('.mobile-nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger?.classList.remove('active');
-      mobileMenu?.classList.remove('active');
-      document.body.style.overflow = '';
+  document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      hamburger?.classList.remove("active");
+      mobileMenu?.classList.remove("active");
+      document.body.style.overflow = "";
     });
   });
 </script>

@@ -1,0 +1,68 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+
+const sections = [
+  {
+    icon: 'alert',
+    label: 'THE PROBLEM',
+    title: 'What needs to be solved',
+    content: project.problemStatement.problem,
+  },
+  {
+    icon: 'why',
+    label: 'WHY IT MATTERS',
+    title: 'Why this project was created',
+    content: project.problemStatement.why,
+  },
+  {
+    icon: 'target',
+    label: 'TARGET USERS',
+    title: 'Who benefits from this',
+    content: project.problemStatement.targetUsers,
+  },
+  {
+    icon: 'impact',
+    label: 'IMPACT',
+    title: 'The consequences of inaction',
+    content: project.problemStatement.impact,
+  },
+];
+---
+
+<section class="section pd-problem" id="problem">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">CHALLENGE</div>
+      <h2 class="display-md reveal reveal-delay-1">PROBLEM STATEMENT</h2>
+    </div>
+    <div class="pd-problem-grid">
+      {sections.map((s, i) => (
+        <div class={`pd-problem-card card reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+          <div class="pd-problem-icon">
+            {s.icon === 'alert' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            )}
+            {s.icon === 'why' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            )}
+            {s.icon === 'target' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            )}
+            {s.icon === 'impact' && (
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            )}
+          </div>
+          <div class="pd-problem-label">{s.label}</div>
+          <h3 class="pd-problem-title">{s.title}</h3>
+          <p class="pd-problem-text">{s.content}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

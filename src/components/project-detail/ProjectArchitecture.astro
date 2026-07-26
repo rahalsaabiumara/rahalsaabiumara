@@ -1,0 +1,66 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+{project.architectureImage && (
+  <section class="section pd-architecture" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">SYSTEM DESIGN</div>
+        <h2 class="display-md reveal reveal-delay-1">ARCHITECTURE</h2>
+      </div>
+      <div class="pd-architecture-wrapper reveal reveal-delay-2">
+        <div class="pd-architecture-image" id="architecture-trigger">
+          <img src={project.architectureImage} alt={`${project.title} Architecture Diagram`} loading="lazy" />
+        </div>
+        <p class="pd-architecture-caption">Click image to enlarge</p>
+      </div>
+    </div>
+
+    <!-- Architecture Lightbox -->
+    <div class="pd-lightbox" id="arch-lightbox" role="dialog" aria-modal="true" aria-label="Architecture Diagram">
+      <button class="pd-lightbox-close" id="arch-lightbox-close" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <div class="pd-lightbox-content">
+        <img src={project.architectureImage} alt={`${project.title} Architecture Diagram`} />
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  const trigger = document.getElementById('architecture-trigger');
+  const archLightbox = document.getElementById('arch-lightbox');
+  const archClose = document.getElementById('arch-lightbox-close');
+
+  trigger?.addEventListener('click', () => {
+    archLightbox?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+
+  archClose?.addEventListener('click', () => {
+    archLightbox?.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  archLightbox?.addEventListener('click', (e) => {
+    if (e.target === archLightbox) {
+      archLightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && archLightbox?.classList.contains('active')) {
+      archLightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+</script>

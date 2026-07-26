@@ -1,0 +1,39 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+{project.achievements.length > 0 && (
+  <section class="section pd-achievements" id="project-achievements">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label reveal">RECOGNITION</div>
+        <h2 class="display-md reveal reveal-delay-1">ACHIEVEMENTS</h2>
+      </div>
+      <div class="pd-achievements-list">
+        {project.achievements.map((ach, i) => (
+          <div class={`pd-achievement-card card reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="pd-achievement-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            </div>
+            <div class="pd-achievement-content">
+              {ach.year && <div class="pd-achievement-year">{ach.year}</div>}
+              <h3 class="pd-achievement-title">{ach.title}</h3>
+              <p class="pd-achievement-desc">{ach.description}</p>
+            </div>
+            <div class="pd-achievement-stripe">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

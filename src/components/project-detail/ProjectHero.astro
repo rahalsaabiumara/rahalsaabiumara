@@ -1,0 +1,101 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<section class="pd-hero" id="project-hero">
+  <div class="pd-hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-glow hero-glow--blue"></div>
+    <div class="hero-glow hero-glow--red"></div>
+  </div>
+
+  <div class="pd-hero-content container">
+    <!-- Breadcrumb -->
+    <nav class="pd-breadcrumb reveal" aria-label="Breadcrumb">
+      <a href="/#projects">Projects</a>
+      <span class="pd-breadcrumb-sep">/</span>
+      <span>{project.title}</span>
+    </nav>
+
+    <div class="pd-hero-grid">
+      <!-- Left: Text Content -->
+      <div class="pd-hero-text">
+        <div class="pd-hero-categories reveal">
+          {project.categories.map((cat) => (
+            <span class="tag tag--accent">{cat.toUpperCase()}</span>
+          ))}
+        </div>
+
+        <h1 class="display-lg reveal reveal-delay-1">{project.title}</h1>
+        <p class="pd-hero-subtitle reveal reveal-delay-2">{project.subtitle}</p>
+
+        <!-- Meta Pills -->
+        <div class="pd-hero-meta reveal reveal-delay-2">
+          <div class="pd-meta-pill">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>{project.year}</span>
+          </div>
+          <div class="pd-meta-pill">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>{project.role}</span>
+          </div>
+          <div class="pd-meta-pill">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>{project.duration}</span>
+          </div>
+          <div class="pd-meta-pill">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>{project.team}</span>
+          </div>
+        </div>
+
+        <!-- Technology Badges -->
+        <div class="pd-hero-techs reveal reveal-delay-3">
+          {project.technologies.map((tech) => (
+            <span class="tag">{tech.toUpperCase()}</span>
+          ))}
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="pd-hero-actions reveal reveal-delay-3">
+          {project.liveDemo && (
+            <a href={project.liveDemo} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              LIVE DEMO
+            </a>
+          )}
+          {project.github && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              GITHUB
+            </a>
+          )}
+          {project.publication && (
+            <a href={project.publication} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+              PUBLICATION
+            </a>
+          )}
+        </div>
+      </div>
+
+      <!-- Right: Thumbnail -->
+      <div class="pd-hero-thumbnail reveal reveal-delay-2">
+        <div class="pd-hero-image-frame">
+          <img src={project.thumbnail} alt={project.title} loading="eager" />
+          <div class="pd-hero-image-stripe">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

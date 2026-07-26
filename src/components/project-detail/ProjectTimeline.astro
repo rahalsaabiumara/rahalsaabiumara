@@ -1,0 +1,30 @@
+---
+import type { Project } from '../../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<section class="section pd-timeline" id="development-process">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label reveal">WORKFLOW</div>
+      <h2 class="display-md reveal reveal-delay-1">DEVELOPMENT PROCESS</h2>
+    </div>
+    <div class="timeline">
+      {project.developmentProcess.map((step, i) => (
+        <div class={`timeline-item reveal ${i > 0 ? `reveal-delay-${Math.min(i, 4)}` : ''}`}>
+          <div class="timeline-dot"></div>
+          <div class="pd-timeline-step-number">{String(i + 1).padStart(2, '0')}</div>
+          <div class="timeline-card">
+            <h3>{step.title}</h3>
+            <p>{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
