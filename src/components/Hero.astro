@@ -12,9 +12,7 @@
   <div class="hero-content hero-content--split">
     <!-- Left: Text Content -->
     <div class="hero-text">
-      <div class="hero-eyebrow">
-        WELCOME TO MY PORTFOLIO
-      </div>
+      <div class="hero-eyebrow">WELCOME TO MY PORTFOLIO</div>
 
       <h1 class="hero-title">
         RAHALSA<br />
@@ -36,6 +34,14 @@
 
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">VIEW PROJECTS</a>
+        <a
+          href="/cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          CURRICULUM VITAE
+        </a>
         <a href="#contact" class="btn btn-outline">GET IN TOUCH</a>
       </div>
     </div>
@@ -79,7 +85,10 @@
 
       <!-- Floating indicator dots -->
       <div class="hero-photos-dots">
-        <button class="hero-dot hero-dot--active" id="hero-dot-0" aria-label="Photo 1"></button>
+        <button
+          class="hero-dot hero-dot--active"
+          id="hero-dot-0"
+          aria-label="Photo 1"></button>
         <button class="hero-dot" id="hero-dot-1" aria-label="Photo 2"></button>
       </div>
     </div>
@@ -94,12 +103,12 @@
 <script>
   // Typing animation
   const roles = [
-    'Machine Learning Enthusiast',
-    'Software Developer',
-    'Data Analyst'
+    "Machine Learning Enthusiast",
+    "Software Developer",
+    "Data Analyst",
   ];
 
-  const roleEl = document.getElementById('hero-role-text');
+  const roleEl = document.getElementById("hero-role-text");
   let roleIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
@@ -136,14 +145,14 @@
 
   // Hero Photo Slideshow with Crossfade
   const photos = [
-    document.getElementById('hero-photo-1'),
-    document.getElementById('hero-photo-2'),
-    document.getElementById('hero-photo-3')
+    document.getElementById("hero-photo-1"),
+    document.getElementById("hero-photo-2"),
+    document.getElementById("hero-photo-3"),
   ];
   const dots = [
-    document.getElementById('hero-dot-0'),
-    document.getElementById('hero-dot-1'),
-    document.getElementById('hero-dot-2')
+    document.getElementById("hero-dot-0"),
+    document.getElementById("hero-dot-1"),
+    document.getElementById("hero-dot-2"),
   ];
 
   let currentPhoto = 0;
@@ -152,15 +161,15 @@
   function switchPhoto(index) {
     // Remove active from all
     photos.forEach((photo) => {
-      photo?.classList.remove('hero-photo--active');
-      photo?.classList.add('hero-photo--exit');
+      photo?.classList.remove("hero-photo--active");
+      photo?.classList.add("hero-photo--exit");
     });
-    dots.forEach((dot) => dot?.classList.remove('hero-dot--active'));
+    dots.forEach((dot) => dot?.classList.remove("hero-dot--active"));
 
     // Activate the target
-    photos[index]?.classList.add('hero-photo--active');
-    photos[index]?.classList.remove('hero-photo--exit');
-    dots[index]?.classList.add('hero-dot--active');
+    photos[index]?.classList.add("hero-photo--active");
+    photos[index]?.classList.remove("hero-photo--exit");
+    dots[index]?.classList.add("hero-dot--active");
 
     currentPhoto = index;
   }
@@ -177,7 +186,7 @@
 
   // Dot click handlers
   dots.forEach((dot, i) => {
-    dot?.addEventListener('click', () => {
+    dot?.addEventListener("click", () => {
       clearInterval(slideInterval);
       switchPhoto(i);
       startSlideshow();
@@ -185,10 +194,10 @@
   });
 
   // Entrance animation
-  const heroPhotos = document.getElementById('hero-photos');
+  const heroPhotos = document.getElementById("hero-photos");
   if (heroPhotos) {
     setTimeout(() => {
-      heroPhotos.classList.add('hero-photos--visible');
+      heroPhotos.classList.add("hero-photos--visible");
     }, 600);
   }
 
