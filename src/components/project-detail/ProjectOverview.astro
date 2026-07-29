@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../../data/projects';
+import ProjectGallery from './ProjectGallery.astro';
 
 interface Props {
   project: Project;
@@ -10,13 +11,35 @@ const { project } = Astro.props;
 
 <section class="section pd-overview" id="overview">
   <div class="container">
-    <div class="section-header">
-      <div class="section-label reveal">OVERVIEW</div>
-      <h2 class="display-md reveal reveal-delay-1">PROJECT DESCRIPTION</h2>
+    <div class="pd-overview-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xxl); align-items: start;">
+      <div class="pd-overview-text-column">
+        <div class="section-header">
+          <div class="section-label reveal">OVERVIEW</div>
+          <h2 class="display-md reveal reveal-delay-1">PROJECT DESCRIPTION</h2>
+        </div>
+        <div class="pd-overview-content reveal reveal-delay-2">
+          <p class="pd-overview-text">{project.fullDescription}</p>
+        </div>
+        <div class="m-stripe m-stripe--short reveal reveal-delay-3" style="margin-top: var(--space-xl);"></div>
+      </div>
+      
+      <div class="pd-overview-gallery-column reveal reveal-delay-4" style="min-width: 0;">
+        {project.gallery && project.gallery.length > 0 && (
+          <div class="section-header" style="margin-bottom: var(--space-md);">
+            <div class="section-label">SHOWCASE</div>
+            <h2 class="display-md">IMAGE GALLERY</h2>
+          </div>
+        )}
+        <ProjectGallery project={project} />
+      </div>
     </div>
-    <div class="pd-overview-content reveal reveal-delay-2">
-      <p class="pd-overview-text">{project.fullDescription}</p>
-    </div>
-    <div class="m-stripe m-stripe--short reveal reveal-delay-3" style="margin-top: var(--space-xl);"></div>
   </div>
 </section>
+
+<style>
+  @media (max-width: 991px) {
+    .pd-overview-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

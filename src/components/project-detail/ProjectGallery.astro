@@ -9,47 +9,40 @@ const { project } = Astro.props;
 ---
 
 {project.gallery.length > 0 && (
-  <section class="section pd-gallery" id="gallery">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-label reveal">SHOWCASE</div>
-        <h2 class="display-md reveal reveal-delay-1">IMAGE GALLERY</h2>
+  <div class="pd-gallery" id="gallery" style="background: transparent; padding: 0;">
+    <div class="pd-gallery-wrapper reveal reveal-delay-2" style="max-width: 100%; margin: 0;">
+      <!-- Main Swiper -->
+      <div class="swiper pd-gallery-main" id="gallery-main">
+        <div class="swiper-wrapper">
+          {project.gallery.map((item, i) => (
+            <div class="swiper-slide">
+              <div class="pd-gallery-slide" data-index={i}>
+                <img src={item.image} alt={item.title} loading="lazy" />
+                <div class="pd-gallery-caption">
+                  <h4>{item.title}</h4>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <!-- Navigation -->
+        <div class="swiper-button-prev pd-gallery-nav"></div>
+        <div class="swiper-button-next pd-gallery-nav"></div>
+        <!-- Pagination -->
+        <div class="swiper-pagination pd-gallery-pagination"></div>
       </div>
 
-      <div class="pd-gallery-wrapper reveal reveal-delay-2">
-        <!-- Main Swiper -->
-        <div class="swiper pd-gallery-main" id="gallery-main">
-          <div class="swiper-wrapper">
-            {project.gallery.map((item, i) => (
-              <div class="swiper-slide">
-                <div class="pd-gallery-slide" data-index={i}>
-                  <img src={item.image} alt={item.title} loading="lazy" />
-                  <div class="pd-gallery-caption">
-                    <h4>{item.title}</h4>
-                    <p>{item.description}</p>
-                  </div>
-                </div>
+      <!-- Thumbs Swiper -->
+      <div class="swiper pd-gallery-thumbs" id="gallery-thumbs">
+        <div class="swiper-wrapper">
+          {project.gallery.map((item) => (
+            <div class="swiper-slide">
+              <div class="pd-thumb-slide">
+                <img src={item.image} alt={item.title} loading="lazy" />
               </div>
-            ))}
-          </div>
-          <!-- Navigation -->
-          <div class="swiper-button-prev pd-gallery-nav"></div>
-          <div class="swiper-button-next pd-gallery-nav"></div>
-          <!-- Pagination -->
-          <div class="swiper-pagination pd-gallery-pagination"></div>
-        </div>
-
-        <!-- Thumbs Swiper -->
-        <div class="swiper pd-gallery-thumbs" id="gallery-thumbs">
-          <div class="swiper-wrapper">
-            {project.gallery.map((item) => (
-              <div class="swiper-slide">
-                <div class="pd-thumb-slide">
-                  <img src={item.image} alt={item.title} loading="lazy" />
-                </div>
-              </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -71,7 +64,7 @@ const { project } = Astro.props;
       </div>
       <div class="pd-lightbox-counter" id="lightbox-counter"></div>
     </div>
-  </section>
+  </div>
 )}
 
 <script>
