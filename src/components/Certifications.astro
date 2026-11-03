@@ -1,5 +1,15 @@
 ---
-
+const certificates = [
+  { src: "/cert/BNSP-1.png", alt: "BNSP Certificate - Associate Data Analyst", portrait: true },
+  { src: "/cert/cert (1).png", alt: "Certificate 1", portrait: false },
+  { src: "/cert/TOEFL-1.png", alt: "TOEFL Certificate 1", portrait: false },
+  { src: "/cert/cert (2).png", alt: "Certificate 2", portrait: false },
+  { src: "/cert/BNSP-2.png", alt: "BNSP Certificate - Junior Network Administrator", portrait: true },
+  { src: "/cert/TOEFL-2.png", alt: "TOEFL Certificate 2", portrait: false },
+  { src: "/cert/cert (3).png", alt: "Certificate 3", portrait: false },
+  { src: "/cert/cert (4).png", alt: "Certificate 4", portrait: false },
+  { src: "/cert/cert (5).png", alt: "Certificate 5", portrait: false },
+];
 ---
 
 <section class="section certifications" id="certifications">
@@ -16,46 +26,17 @@
     <div class="cert-carousel reveal reveal-delay-3">
       <div class="cert-carousel-track" id="cert-carousel-track">
         <!-- Original set -->
-        <div class="cert-carousel-slide">
-          <img src="/cert-1.png" alt="Certificate 1" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-2.png" alt="Certificate 2" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-3.png" alt="Certificate 3" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-4.png" alt="Certificate 4" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-5.png" alt="Certificate 5" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-6.png" alt="Certificate 6" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-7.png" alt="Certificate 7" loading="lazy" />
-        </div>
+        {certificates.map((cert) => (
+          <div class={`cert-carousel-slide${cert.portrait ? " cert-carousel-slide--portrait" : ""}`}>
+            <img src={cert.src} alt={cert.alt} loading="lazy" />
+          </div>
+        ))}
         <!-- Duplicate set for seamless loop -->
-        <div class="cert-carousel-slide">
-          <img src="/cert-2.png" alt="Certificate 2" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-3.png" alt="Certificate 3" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-1.png" alt="Certificate 1" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-4.png" alt="Certificate 4" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-5.png" alt="Certificate 5" loading="lazy" />
-        </div>
-        <div class="cert-carousel-slide">
-          <img src="/cert-6.png" alt="Certificate 6" loading="lazy" />
-        </div>
+        {certificates.map((cert) => (
+          <div class={`cert-carousel-slide${cert.portrait ? " cert-carousel-slide--portrait" : ""}`}>
+            <img src={cert.src} alt={cert.alt} loading="lazy" />
+          </div>
+        ))}
       </div>
       <!-- Gradient overlays for seamless edge fading -->
       <div class="cert-carousel-fade cert-carousel-fade--left"></div>

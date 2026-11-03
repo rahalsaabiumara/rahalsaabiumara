@@ -99,6 +99,263 @@ export interface Project {
 // ============================================================
 
 export const projects: Project[] = [
+  // --- 0. Income Statement (PT LPP Agro Nusantara) ---
+  {
+    title: "Income Statement",
+    slug: "income-statement",
+    subtitle:
+      "AI-Powered Financial Report Automation & Business Intelligence Platform at PT LPP Agro Nusantara",
+    shortDescription:
+      "An enterprise Business Intelligence and financial report automation web platform that extracts management report (Laporan Manajemen) tables from PDFs using Gemini Vision AI, syncs with Google Drive/Sheets & Supabase, and visualizes multi-year financial KPIs.",
+    fullDescription:
+      "Income Statement (Income Management System) is an end-to-end Business Intelligence and financial workflow automation web application developed for PT LPP Agro Nusantara. The platform streamlines the entire lifecycle of monthly Management Reports (Laporan Manajemen / LM)—from syncing master documents on Google Drive and Google Sheets, automatically detecting attachment pages and extracting structured financial tables (Pendapatan/PDPT, Laba Rugi/LR, Neraca/Balance Sheet, and Arus Kas/Cash Flow) via Google Gemini Vision API, to validating accounting figures, mapping them into standardized Excel templates, and persisting records into Supabase. Beyond automation, it features an interactive Executive BI Cockpit ('Ikhtisar Kinerja Keuangan'), hierarchical YTD/Annual/Quarterly/Monthly financial tables, multi-account trend comparisons, and a 4-stage collaborative review and approval workflow with cell-level commenting.",
+    year: "2026",
+    role: "Web BI & Full-Stack Developer",
+    duration: "4 Months",
+    team: "Internal BI Team",
+    status: "Completed",
+    platform: "Web Application",
+    categories: ["web"],
+    github: "https://github.com/rahalsaabiumara/income-management-system",
+    thumbnail: "/income statement/thumbnail.png",
+    gallery: [
+      {
+        image: "/income statement/thumbnail.png",
+        title: "Income Statement BI Platform Overview",
+        description:
+          "Business Intelligence and AI-assisted financial report management platform for PT LPP Agro Nusantara.",
+      },
+      {
+        image: "/income statement/Screenshot 2026-11-03 103653.png",
+        title: "Ikhtisar Kinerja Keuangan (Executive Summary)",
+        description:
+          "Executive financial summary with automated narrative insights, Revenue vs. RKAP & Net Profit trend chart, and 8 core financial KPI cards (Revenue, Operational EBITDA, Net Income, NOCF, Assets, Liabilities, Equity, and Capex).",
+      },
+      {
+        image: "/income statement/Screenshot 2026-11-03 103751.png",
+        title: "Profit & Loss BI Cockpit & KPI Strip",
+        description:
+          "Interactive Profit & Loss dashboard supporting Annual, Quarterly, YTD, and Monthly views, complete with margin badges (GPM, COGS, SG&A, NPM), Realisasi vs. RKAP trend lines, multi-year performance breakdown (2022–2026), and hierarchical table views.",
+      },
+      {
+        image: "/income statement/Screenshot 2026-11-03 103854.png",
+        title: "Multi-Account Trend Comparison & Hierarchical Table",
+        description:
+          "Dynamic sub-account selection allowing side-by-side realization trend comparisons and multi-year breakdowns across selected financial line items with depth-based hierarchical rows.",
+      },
+      {
+        image: "/income statement/Screenshot 2026-11-03 103628.png",
+        title: "Document Hub & Automated PDF Table Detection",
+        description:
+          "Centralized Laporan Manajemen (LM) document repository that automatically locates target financial tables (Pendapatan, Laba Rugi, Neraca, Arus Kas) by page number with inline PDF preview and one-click Excel/Tabular extraction.",
+      },
+      {
+        image: "/income statement/Screenshot 2026-11-03 103527.png",
+        title: "Multi-Stage Review, Revision & Approval Hub",
+        description:
+          "4-step financial governance workflow (Review → Revisi → Approval Admin → Terkirim) featuring side-by-side Realisasi vs. RKAP editing and cell-linked review comments.",
+      },
+    ],
+    problemStatement: {
+      problem:
+        "Processing monthly Management Reports (Laporan Manajemen / LM) at PT LPP Agro Nusantara required manually locating financial tables inside multi-page PDF reports, re-typing figures into standardized Excel templates, reconciling RKAP vs. Realisasi across years, and compiling executive visualizations.",
+      why: "Manual extraction and spreadsheet consolidation across four core financial statements (Pendapatan, Laba Rugi, Neraca, and Arus Kas) are time-consuming, prone to transcription errors, and delay executive decision-making.",
+      targetUsers:
+        "Executive Board, Finance & Accounting Division, and Business Intelligence / Planning Teams at PT LPP Agro Nusantara.",
+      impact:
+        "Automating PDF table extraction, validation, and BI visualization eliminates repetitive manual data entry, enforces accounting consistency via automated cross-checks, and delivers real-time financial insights.",
+    },
+    solutionOverview: {
+      solution:
+        "An integrated full-stack web platform combining an AI-powered PDF-to-Excel extraction pipeline (Gemini Vision API + automated accounting validation) with an interactive Executive BI Cockpit and a 4-stage collaborative review workflow.",
+      whyChosen:
+        "React 19, Vite, Tailwind CSS v4, TanStack Query, and Recharts deliver a responsive, high-density analytics cockpit. On the backend, Node.js/Express orchestrates Google Drive/Sheets APIs, pdf-lib/pdfjs-dist, Gemini Vision API for schema-guided table extraction, ExcelJS for template mapping, and Supabase for scalable relational storage and authentication.",
+      howItWorks:
+        "Master documents sync from Google Drive/Sheets or direct PDF/Excel uploads via a persistent, minimizable progress modal. The backend detects attachment pages and uses Gemini Vision with strict JSON schemas (PDPT, LR, NERACA, ARUS KAS) to extract figures. Validation services verify subtotals and account hierarchies before mapping data to Excel templates and Supabase, where reviewers audit, comment on specific cells, and approve reports to publish directly to the Executive BI Dashboard.",
+    },
+    developmentProcess: [
+      {
+        title: "Domain Analysis & Financial Template Modeling",
+        description:
+          "Analyzed PT LPP Agro Nusantara's monthly Laporan Manajemen (LM) PDF structures, 2022–2026 RKAP/Realisasi schemas, and canonical account hierarchies across Revenue, Profit & Loss, Balance Sheet, and Cash Flow.",
+      },
+      {
+        title: "AI Extraction & Validation Pipeline",
+        description:
+          "Built pdf-lib/pdfjs-dist attachment detectors, engineered schema-constrained Gemini Vision extractors (geminiVisionExtractor.js), and implemented automated accounting validation rules (validationService.js) and Excel template mappers (templateMapper.js).",
+      },
+      {
+        title: "Google Workspace to Supabase Migration",
+        description:
+          "Integrated Google Drive & Sheets OAuth2 services for master data synchronization and built automated migration pipelines (migrateGoogleSheetsToSupabase.js) to transition historical tabular data into Supabase.",
+      },
+      {
+        title: "Executive BI Cockpit & Hierarchical Engine",
+        description:
+          "Developed the BI calculation engine (buildTypeKpis, buildMonthlyData, buildHierarchicalTableRowsYTD) powering Ikhtisar Kinerja Keuangan, KPI strips, and interactive Recharts visualizations.",
+      },
+      {
+        title: "Collaborative Review Hub & Persistent Upload UX",
+        description:
+          "Implemented the 4-stage review/approval workflow (ReviewHub.jsx) with cell-linked comments and a cross-page minimizable PDF processing modal (PdfUploadProgressModal).",
+      },
+      {
+        title: "Automated Testing & Deployment",
+        description:
+          "Wrote unit and component test suites using Vitest for financial calculations, LM row matching, and modal state persistence, and configured production deployment on Vercel.",
+      },
+    ],
+    features: [
+      {
+        icon: "dashboard",
+        title: "Executive Financial Summary (Ikhtisar)",
+        description:
+          "Automated executive narrative and 8-card KPI overview (Revenue, EBITDA, Net Income, NOCF, Assets, Liabilities, Equity, Capex) with RKAP & YoY badges.",
+      },
+      {
+        icon: "classification",
+        title: "Gemini Vision PDF Table Extraction",
+        description:
+          "Automatically detects target pages in PDF reports and extracts structured PDPT, Laba Rugi, Neraca, and Arus Kas tables using schema-guided Gemini Vision AI.",
+      },
+      {
+        icon: "chart",
+        title: "Multi-Mode BI Cockpit & Trend Comparison",
+        description:
+          "Analyze Revenue, Profit Loss, Cash Flow, and Balance Sheet across Annual, Quarterly, YTD, and Monthly modes with multi-account trend comparison charts.",
+      },
+      {
+        icon: "workflow",
+        title: "4-Stage Review & Cell-Level Comments",
+        description:
+          "Structured governance workflow (Review → Revisi → Approval Admin → Terkirim) with inline table editing and comments linked directly to specific cells/sheets.",
+      },
+      {
+        icon: "report",
+        title: "Automated Excel Mapping & Batch ZIP",
+        description:
+          "Maps extracted financial rows into standardized multi-sheet Excel templates with canonical account matching (lmRows.js) and batch ZIP export.",
+      },
+      {
+        icon: "upload",
+        title: "Drive/Sheets Sync & Persistent Modal",
+        description:
+          "Synchronizes master reports with Google Drive/Sheets and processes PDF uploads in the background via a minimizable cross-page floating widget.",
+      },
+    ],
+    techStack: [
+      {
+        category: "Frontend & BI Visualization",
+        items: [
+          "React 19",
+          "Vite",
+          "Tailwind CSS v4",
+          "TanStack Query",
+          "Recharts",
+          "Headless UI",
+          "Framer Motion",
+        ],
+      },
+      {
+        category: "Backend & API",
+        items: ["Node.js", "Express.js", "REST API"],
+      },
+      {
+        category: "AI & Document Processing",
+        items: [
+          "Google Gemini Vision API",
+          "pdf-lib & pdfjs-dist",
+          "ExcelJS & SheetJS (xlsx)",
+          "PapaParse",
+        ],
+      },
+      {
+        category: "Database & Cloud Integration",
+        items: [
+          "Supabase (PostgreSQL & Auth)",
+          "Google Drive API",
+          "Google Sheets API (OAuth2)",
+        ],
+      },
+      {
+        category: "Testing & Deployment",
+        items: ["Vitest", "Vercel", "Git"],
+      },
+    ],
+    challenges: [
+      {
+        problem:
+          "Inconsistent account naming and layout variations across multi-year (2022–2026) monthly PDF Management Reports (Laporan Manajemen).",
+        solution:
+          "Engineered a multi-tier canonical row matcher (matchExact, matchCanonical, matchKeyword in lmRows.js & templateMapper.js) combined with schema-guided Gemini Vision prompts and post-extraction accounting validation (validationService.js).",
+        result:
+          "Achieved reliable automated mapping across all 4 core financial statements (Pendapatan, Laba Rugi, Neraca, Arus Kas) with automated discrepancy flagging.",
+      },
+      {
+        problem:
+          "Computing accurate YTD, Quarterly, Annual, and Monthly aggregations when combining stock metrics (Balance Sheet/Ending Cash) with flow metrics (Revenue/Profit Loss) and RKAP targets.",
+        solution:
+          "Architected a dedicated BI calculation layer (aggregation.js, calculations.js, typeKpi.js, ikhtisarModel.js) that distinguishes flow vs. point-in-time accounts, computes effective YTD cutoffs, and generates dynamic depth-colored hierarchical table rows.",
+        result:
+          "Delivered instant, consistent financial calculations and YoY/RKAP achievement indicators across all BI cockpit views.",
+      },
+      {
+        problem:
+          "Long-running PDF extraction pipelines interrupted user navigation when switching between the Document Hub, Review Queue, and BI Dashboards.",
+        solution:
+          "Built a persistent, minimizable floating progress modal (PdfUploadProgressModal) mounted at the application shell level with real-time step polling and safe close-confirmation guardrails.",
+        result:
+          "Users can freely browse dashboards and review queues while batch PDF extractions run seamlessly in the background.",
+      },
+    ],
+    metrics: [
+      {
+        value: "4",
+        label: "Core Statements",
+        description: "Pendapatan, Laba Rugi, Neraca & Arus Kas",
+      },
+      {
+        value: "55+",
+        label: "LM Reports Managed",
+        description: "Multi-year monthly management reports (2022–2026)",
+      },
+      {
+        value: "8+",
+        label: "Executive KPIs",
+        description: "Real-time RKAP achievement & YoY growth indicators",
+      },
+      {
+        value: "4-Stage",
+        label: "Approval Workflow",
+        description: "Review, Revision, Admin Approval & Published",
+      },
+      {
+        value: "134",
+        label: "Project Modules",
+        description: "Full-stack React, Express, AI & BI architecture",
+      },
+      {
+        value: "~90%",
+        label: "Faster Processing",
+        description: "Reduction in manual PDF-to-Excel report preparation",
+      },
+    ],
+    achievements: [],
+    lessonsLearned: [
+      "Combining LLM vision extraction (Gemini Vision API) with deterministic post-processing rules and accounting checksum validations is essential when dealing with enterprise financial data where precision is non-negotiable.",
+      "Separating raw tabular storage from a dedicated BI view-model layer (aggregation, KPI builders, and canonical row matchers) keeps complex financial dashboards fast, testable, and easy to maintain.",
+      "Human-in-the-loop governance—such as a structured Review/Revision queue and cell-linked commenting—builds executive trust when transitioning from manual spreadsheets to AI-assisted automation.",
+      "Migrating from Google Sheets as a primary datastore to Supabase PostgreSQL significantly improved query performance, multi-user concurrency, and role-based access control.",
+    ],
+    technologies: [
+      "React",
+      "Gemini AI",
+      "Supabase",
+      "Node.js",
+      "Tailwind CSS",
+      "Recharts",
+    ],
+  },
   // --- 1. EduDetect ---
   {
     title: "EduDetect",
